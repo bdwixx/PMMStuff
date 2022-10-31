@@ -1,0 +1,127 @@
+#############################################################
+#                    Streaming Overlay                      #
+#         Created by Yozora, Bullmoose20, & Sohjiro         #
+#            Credit to Magic815 for base images             #
+#############################################################
+#  Call this from your config.yml (Movie or Show):          #
+#  If nothing is specified these are the defaults           #
+#                                                           #
+#    overlay_path:                                          #
+#      - git: PMM/overlays/streaming                        #
+#        template_variables:                                #
+#          # Set the horizontal offset for the overlay      #
+#          horizontal_offset: 15                            #
+#          # Set the horizontal align for the overlay       #
+#          horizontal_align: left                           #
+#          # Set the vertical offset for the overlay        #
+#          vertical_offset: 150                             #
+#          # Set the vertical align for the overlay         #
+#          vertical_align: bottom                           #
+#          # Set the back color for the overlay             #
+#          back_color: "#00000099"                          #
+#          # Set the back radius for the overlay            #
+#          back_radius: 30                                  #
+#          # Set the back width for the overlay             #
+#          back_width: 305                                  #
+#          # Set the back height for the overlay            #
+#          back_height: 105                                 #
+#                                                           #
+#          # Use the Amazon overlay                         #
+#          use_amazon: true                                 #
+#          # Use the AppleTV overlay                        #
+#          use_appletv: true                                #
+#          # Use the Disney overlay                         #
+#          use_disney: true                                 #
+#          # Use the HBO-Max overlay                        #
+#          use_hbomax: true                                 #
+#          # Use the Hulu overlay                           #
+#          use_hulu: true                                   #
+#          # Use the Netflix overlay                        #
+#          use_netflix: true                                #
+#          # Use the Paramount overlay                      #
+#          use_paramount: true                              #
+#          # Use the Peacock overlay                        #
+#          use_peacock: true                                #
+#          # Use the YouTube overlay                        #
+#          use_youtube: true                                #
+#############################################################
+
+templates:
+  Streaming:
+    optional:
+      - overlay_level
+      - use_<<slug>>
+    default:
+      overlay: <<overlay_name>>
+      horizontal_offset: 0
+      horizontal_align: center
+      vertical_offset: 15
+      vertical_align: bottom
+      back_color: "#00000099"
+      back_radius: 30
+      back_width: 305
+      back_height: 105
+    allowed_library_types: <<use_<<slug>>>>
+    ignore_blank_results: true
+    overlay:
+      name: <<overlay_name>>
+      url: https://raw.githubusercontent.com/bdwixx/PMMStuff/main/<<overlay>>.png
+      group: streaming
+      weight: <<weight>>
+      horizontal_offset: <<horizontal_offset>>
+      horizontal_align: <<horizontal_align>>
+      vertical_offset: <<vertical_offset>>
+      vertical_align: <<vertical_align>>
+      back_color: <<back_color>>
+      back_radius: <<back_radius>>
+      back_width: <<back_width>>
+      back_height: <<back_height>>
+    tmdb_discover:
+      with_watch_providers: <<provider_id>>
+      watch_region: HU
+      sort_by: popularity.desc
+      limit: 10000
+
+overlays:
+
+  Netflix:
+    template:
+      - name: Streaming
+        weight: 200
+        slug: netflix
+        provider_id: 8
+
+  Prime:
+    template:
+      - name: Streaming
+        weight: 190
+        slug: amazon
+        provider_id: 119
+
+  Disney:
+    template:
+      - name: Streaming
+        weight: 180
+        slug: disney
+        provider_id: 337
+
+  HBO-Max:
+    template:
+      - name: Streaming
+        weight: 170
+        slug: hbomax
+        provider_id: 384
+
+  YouTube:
+    template:
+      - name: Streaming
+        weight: 160
+        slug: youtube
+        provider_id: 188
+
+  AppleTV:
+    template:
+      - name: Streaming
+        weight: 130
+        slug: appletv
+        provider_id: 350
